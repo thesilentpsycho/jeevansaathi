@@ -5,7 +5,7 @@ from config import PROFILES_DATA_PATH
 
 
 class Person:
-    def __init__(self, checksum, username, caste, height, name, age, dp):
+    def __init__(self, checksum, username, caste, height, name, age, dp, datadump):
         self.dp = dp
         self.caste = caste
         self.username = username
@@ -13,13 +13,14 @@ class Person:
         self.name = name
         self.age = age
         self.height = height
+        self.datadump = datadump
 
     def __str__(self):
         return f"UserName: {self.username}, Profile: {self.checksum}, Name: {self.name}, Age: {self.age}, Caste: {self.caste}, Height: {self.height}"
 
 def person_decoder(obj):
     if 'name' in obj and 'age' in obj and 'height' in obj and 'checksum' in obj and 'username' in obj:
-        return Person(obj['checksum'], obj['username'], obj['caste'], obj['height'], obj['name'], obj['age'], obj['dp'])
+        return Person(obj['checksum'], obj['username'], obj['caste'], obj['height'], obj['name'], obj['age'], obj['dp'], None)
     return None
 
 def load_people():
@@ -35,7 +36,7 @@ class PersonEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, Person):
             return {"name": obj.name, "age": obj.age, "height": obj.height, "dp": obj.dp,
-                    "username": obj.username, "checksum": obj.checksum, "caste": obj.caste}
+                    "username": obj.username, "checksum": obj.checksum, "caste": obj.caste, "datadump": obj.datadump}
         return super().default(obj)
 
 

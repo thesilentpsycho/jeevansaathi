@@ -3,7 +3,7 @@ import os
 import time
 
 from api import get_pics
-from config import PROFILES_DATA_PATH, PICS_DATA_PATH, DELAY_IS_SECONDS
+from config import PICS_DATA_PATH, DELAY_IN_SECONDS
 from person import Person, load_people
 
 
@@ -27,6 +27,6 @@ for person_data in load_people():
         pics_data[person.checksum] = pics
         if i % 10 == 0:
             dump(pics_data)
-        time.sleep(DELAY_IS_SECONDS)
+        time.sleep(DELAY_IN_SECONDS)
     i += 1
 

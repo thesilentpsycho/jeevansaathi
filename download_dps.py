@@ -39,4 +39,4 @@ def download_images_parallel(image_links, max_workers=10):
             future.result()
 
 
-download_images_parallel(image_links, max_workers=10)
+download_images_parallel(image_links, max_workers=20)
