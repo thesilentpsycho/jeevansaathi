@@ -1,7 +1,8 @@
-PROFILES_DATA_PATH = 'data/bania_women_earth.json'
-PICS_DATA_PATH = 'data/bania_women_pics.json'
-DP_OUTPUT_FOLDER = 'initial_shortlist/bania_earth'
-SEARCH_ID = '170909259054206983'
-NUM_OF_RESULTS = 14500
+PROFILES_DATA_PATH = 'data/jammu_kashmir.json'
+# PICS_DATA_PATH = 'data/bania_women_pics.json'
+DP_OUTPUT_FOLDER = 'all_dp/jammu_kashmir'
+SEARCH_ID = '170995222154206983'
+NUM_OF_RESULTS = 260
 DELAY_IN_SECONDS = 1
-AUTH_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJ2ZXIiOjIuMCwicGlkIjo1NDIwNjk4MywidG9rZW4iOiJERDVERHNHa0REUkNqc2thMkM4QzE1YjEzczM4RDZEayIsImF0IjoxNzA5MDkxODA0LCJhcCI6e319.kbw0tkeZXThE58erUvIrXdChapdRSNNz3t7orJZ60-w'
+AUTH_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJ2ZXIiOjIuMCwicGlkIjo1NDIwNjk4MywidG9rZW4iOiJERDVERHNHa0REUkNqc2thMkM4QzE1YjEzczM4RDZEayIsImF0IjoxNzA5OTQ4Nzk3LCJhcCI6e319.U3UO7qahzEhybr2OZDlRumm6B9ucigmFpaWZMrPWkAQ'
+
