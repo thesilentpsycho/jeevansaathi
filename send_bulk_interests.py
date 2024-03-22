@@ -1,6 +1,6 @@
 from api import send_interest
 from config import EXPRESSED_INTEREST_FILEPATH
-from person import get_username_to_checksum_map
+from utils import get_username_to_checksum_map
 
 username_checksum_map = get_username_to_checksum_map()
 
@@ -31,7 +31,9 @@ username = 'XSTS6527'
 
 if username not in already_sent:
     checksum = get_profile_checksum(username)
-    done = send_interest(checksum)
+    done, err = send_interest(checksum)
     if done:
         add_to_sent_interests(username)
         already_sent.add(username)
+    else:
+        print(f'error with username {username} error code: {err}')

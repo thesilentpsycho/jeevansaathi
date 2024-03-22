@@ -1,6 +1,7 @@
 DATA_PATH = 'data'
 PROFILES_DATA_PATH = DATA_PATH + '/jammu_kashmir.json'
-# PICS_DATA_PATH = 'data/bania_women_pics.json'
+CURR_WORKING_PATH = 'initial_shortlist/usa2'
+ALL_PICS_DATA_FILE = 'all_pics_links.json'
 DP_OUTPUT_FOLDER = 'all_dp/jammu_kashmir'
 SEARCH_ID = '170995222154206983'
 NUM_OF_RESULTS = 260

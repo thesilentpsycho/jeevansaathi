@@ -36,9 +36,11 @@ def send_interest(profile_checksum):
     response = requests.request("POST", url, headers=headers, data=payload)
 
     if response.status_code == 200:
-        return True
+        return True, None
+    if response.status_code == 422:
+        return True, None
 
-    return False
+    return False, response.status_code
 
 
 def get_pics(profile_checksum):
@@ -69,13 +71,22 @@ def get_pics(profile_checksum):
 
     response = requests.request("GET", url, headers=headers, data=payload)
     resp_json = json.loads(response.text)
-    pics = []
+
+    link_properties = ['originalPicUrl', 'mainPicUrl', 'profilePic450Url', 'mobileAppPicUrl']
+    pic_urls = []
+
     try:
-        pics = [item['originalPicUrl'] for item in resp_json['data']['items'][0]['media']['photo']['items']]
+        for item in resp_json['data']['items'][0]['media']['photo']['items']:
+            url = None
+            for prop in link_properties:
+                if prop in item and item[prop]:
+                    url = item[prop]
+                    break
+            pic_urls.append(url)
     except Exception as e:
-        pics = []
+        pic_urls = []
         print(f"Error: {e}")
-    return pics
+    return pic_urls
 
 
 

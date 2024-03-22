@@ -1,7 +1,7 @@
 import json
 import os
 
-from config import PROFILES_DATA_PATH, DATA_PATH
+from config import PROFILES_DATA_PATH
 
 
 class Person:
@@ -31,26 +31,6 @@ def load_people():
     else:
         return []
 
-
-def load_all_people_data():
-    result = []
-    if os.path.exists(DATA_PATH):
-        for filename in os.listdir(DATA_PATH):
-            if filename.endswith('.json'):
-                file_path = os.path.join(DATA_PATH, filename)
-                with open(file_path, 'r') as json_file:
-                    loaded_json_data = json.load(json_file, object_hook=person_decoder)
-                    result.extend(loaded_json_data)
-    return result
-
-
-def get_username_to_checksum_map():
-    people = load_all_people_data()
-    result = {}
-    for curr in people:
-        if curr is not None and curr.username and curr.checksum:
-            result[curr.username] = curr.checksum
-    return result
 
 class PersonEncoder(json.JSONEncoder):
     def default(self, obj):
