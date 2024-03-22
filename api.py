@@ -3,6 +3,44 @@ import json
 
 from config import AUTH_TOKEN
 
+def send_interest(profile_checksum):
+    url = "https://www.jeevansathi.com/app-gateway/jscontact/v1/initiate"
+
+    payload = json.dumps({
+        "profileCheckSum": "{}".format(profile_checksum),
+        "pageSource": "VDP",
+        "searchType": "4"
+    })
+    headers = {
+        'Accept': 'application/json',
+        'Accept-Language': 'en-US,en;q=0.9,hi;q=0.8',
+        'Connection': 'keep-alive',
+        'Content-Type': 'application/json',
+        'Cookie': 'AUTHCHECKSUM={}'.format(AUTH_TOKEN),
+        'DNT': '1',
+        'JB-Profile-Identifier': AUTH_TOKEN,
+        'JS-Profile-Identifier': AUTH_TOKEN,
+        'JS-User-Agent': 'JSPC',
+        'Origin': 'https://www.jeevansathi.com',
+        'Referer': f'https://www.jeevansathi.com/profile-detail/{profile_checksum}?stype=4',
+        'Sec-Fetch-Dest': 'empty',
+        'Sec-Fetch-Mode': 'cors',
+        'Sec-Fetch-Site': 'same-origin',
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+        'X-Requested-With': 'XMLHttpRequest',
+        'sec-ch-ua': '"Chromium";v="122", "Not(A:Brand";v="24", "Google Chrome";v="122"',
+        'sec-ch-ua-mobile': '?0',
+        'sec-ch-ua-platform': '"macOS"'
+    }
+
+    response = requests.request("POST", url, headers=headers, data=payload)
+
+    if response.status_code == 200:
+        return True
+
+    return False
+
+
 def get_pics(profile_checksum):
 
     url = f"https://api.jeevansathi.com/jsprofile/v2/profiles?rtype=json&ids={profile_checksum}&vt=media"
