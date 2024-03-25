@@ -75,3 +75,13 @@ def download_images_parallel(image_links, already_downloaded, output_folder, max
 
         for future in as_completed(futures):
             future.result()
+
+
+def read_all_usernames_from_folder(folder_path):
+    jpg_filenames = set()
+    # jpg_filenames.add('UAWA1961')
+    # return jpg_filenames
+    for filename in os.listdir(folder_path):
+        if filename.endswith('.jpg') or filename.endswith('.JPG'):
+            jpg_filenames.add(os.path.splitext(filename)[0])
+    return jpg_filenames

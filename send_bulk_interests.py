@@ -1,6 +1,8 @@
+import time
+
 from api import send_interest
-from config import EXPRESSED_INTEREST_FILEPATH
-from utils import get_username_to_checksum_map
+from config import EXPRESSED_INTEREST_FILEPATH, CURR_WORKING_PATH
+from utils import get_username_to_checksum_map, read_all_usernames_from_folder
 
 username_checksum_map = get_username_to_checksum_map()
 
@@ -25,15 +27,19 @@ def add_to_sent_interests(username):
 
 
 already_sent = load_already_sent()
+for idx, username in enumerate(read_all_usernames_from_folder(CURR_WORKING_PATH)):
+    if username not in already_sent:
+        checksum = get_profile_checksum(username)
+        done, err = send_interest(checksum)
+        time.sleep(1)
+        if done:
+            print(f'{idx} Interest successfully sent to username {username}')
+            add_to_sent_interests(username)
+            already_sent.add(username)
+        else:
+            if err and 'CEB2029' in err:
+                print(f'already sent. username {username} error: {err}')
+                add_to_sent_interests(username)
+                already_sent.add(username)
 
-
-username = 'XSTS6527'
-
-if username not in already_sent:
-    checksum = get_profile_checksum(username)
-    done, err = send_interest(checksum)
-    if done:
-        add_to_sent_interests(username)
-        already_sent.add(username)
-    else:
-        print(f'error with username {username} error code: {err}')
+            print(f'error with username {username} error: {err}')

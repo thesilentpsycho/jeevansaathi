@@ -37,10 +37,8 @@ def send_interest(profile_checksum):
 
     if response.status_code == 200:
         return True, None
-    if response.status_code == 422:     #already sent interest
-        return True, None
 
-    return False, response.status_code
+    return False, f'status: {response.status_code}, {response.text}'
 
 
 def get_pics(profile_checksum):
