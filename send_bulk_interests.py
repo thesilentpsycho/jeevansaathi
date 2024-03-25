@@ -36,10 +36,9 @@ for idx, username in enumerate(read_all_usernames_from_folder(CURR_WORKING_PATH)
             print(f'{idx} Interest successfully sent to username {username}')
             add_to_sent_interests(username)
             already_sent.add(username)
+        elif err and 'CEB2029' in err:
+            print(f'{idx} already sent. username {username} error: {err}')
+            add_to_sent_interests(username)
+            already_sent.add(username)
         else:
-            if err and 'CEB2029' in err:
-                print(f'already sent. username {username} error: {err}')
-                add_to_sent_interests(username)
-                already_sent.add(username)
-
-            print(f'error with username {username} error: {err}')
+            print(f'{idx} error with username {username} error: {err} msg: {"profile is deleted" if err and "CEB2009" in err else "unknown"}')
