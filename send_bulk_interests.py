@@ -2,7 +2,7 @@ import time
 
 from api import send_interest
 from config import EXPRESSED_INTEREST_FILEPATH, CURR_WORKING_PATH
-from utils import get_username_to_checksum_map, read_all_usernames_from_folder
+from utils import get_username_to_checksum_map, load_all_usernames_in_dir
 
 username_checksum_map = get_username_to_checksum_map()
 
@@ -27,7 +27,7 @@ def add_to_sent_interests(username):
 
 
 already_sent = load_already_sent()
-for idx, username in enumerate(read_all_usernames_from_folder(CURR_WORKING_PATH)):
+for idx, username in enumerate(load_all_usernames_in_dir(CURR_WORKING_PATH)):
     if username not in already_sent:
         checksum = get_profile_checksum(username)
         done, err = send_interest(checksum)
