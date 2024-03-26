@@ -39,3 +39,4 @@ for username in usernames:
         download_images_async(image_links, already_downloaded_pics, pics_path)
         time.sleep(DELAY_IN_SECONDS)
 
+dump_pics_cdn_links_data(pics_data)
